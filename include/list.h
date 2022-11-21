@@ -8,10 +8,23 @@ struct List {
 };
 typedef struct List List;
 // Aufgabe 1
-List* listCreate();
-void listPush(List* list);
+List* listCreate(){
+	List* L = (struct List*) malloc(200 * sizeof(struct List));
+	L->head = NULL;
+	return L;
+}
+void listPush(List* list, unsigned int value){
+	Element *e = (struct Element*) malloc(sizeof(struct Element));
+	e->value = value;
+	list->head = e;
+}
 Element* listPop(List* list);
-void listPrint(List* list);
+void listPrint(List* list){
+
+	if(list->head == NULL){
+		printf("List ist leer!");
+	}
+}
 // Aufgabe 2
 Element* listFindElement(List* list, unsigned int value);
 int listGetIndexOfElement(List* list, unsigned int value);

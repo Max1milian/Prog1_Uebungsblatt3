@@ -1,2 +1,7 @@
+.vscode
+out/
+build
+[D]ebug
+[R]elease
 .ccls-cache
 main
