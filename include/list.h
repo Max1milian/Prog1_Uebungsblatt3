@@ -13,7 +13,7 @@ struct List {
 typedef struct List List;
 // Aufgabe 1
 List* listCreate(){
-	List* L = (struct List*) malloc(200 * sizeof(struct List));
+	List* L = (struct List*) calloc(20, sizeof(struct List));
 	L->head = NULL;
 	return L;
 }
@@ -21,12 +21,12 @@ List* listCreate(){
 void listPush(List* list, unsigned int value){
 	Element *e = (struct Element*) malloc(sizeof(struct Element));
 	e->value = value;
-	list->head = e;
+	list->head->pSuccessor = e;
 }
 
 Element* listPop(List* list){
-		list->head++; //WTF!?
-		return list->head;
+		
+	return list->head;
 }
 
 void listPrint(List* list){

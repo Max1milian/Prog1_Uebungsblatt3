@@ -8,7 +8,7 @@ struct Element {
 typedef struct Element Element;
 
 Element* elementCreate(){
-	Element* e = (struct Element*) malloc(sizeof(struct Element));//bisschen Buffer schadet ja nie
+	Element* e = (struct Element*) calloc(2, sizeof(struct Element));
 	e->value = 0;
 	e->pSuccessor = NULL;
 	return e;
