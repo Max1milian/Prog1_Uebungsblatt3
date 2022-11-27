@@ -25,28 +25,39 @@ void listPush(List* list, unsigned int value){
 }
 
 Element* listPop(List* list){
-		
+	Element* e;
+	list->head = (Element*)e->pSuccessor;
 	return list->head;
 }
 
-void listPrint(List* list){
-	
-	if(list->head == NULL){
-		printf("List ist leer!");
-		return;
+void listPrint(const List* list){
+	Element* e = list->head;
+	while (e != NULL) {
+		printf("%i", e->value);
+		printf("-->");
+		e = (Element*)e->pSuccessor;
 	}
-	else {
-		while (list->head != NULL) {
-			printf("");	
-		}
-		printf("\n");
+	if (list == NULL) {
+		printf("liste leer!\n");
 	}
 
 }
 
 // Aufgabe 2
-Element* listFindElement(List* list, unsigned int value);
-int listGetIndexOfElement(List* list, unsigned int value);
+Element* listFindElement(List* list, unsigned int value){
+	//element erstellen
+	//listenkopf übergeben
+	//mit while drüberitterieren
+	//danach das element übergeben
+	return NULL;
+}
+int listGetIndexOfElement(List* list, unsigned int value){
+	//element erstellen
+	//listenkopf übergeben
+	//mit while drüberitterieren
+	//danach die Stelle übergeben
+
+}
 Element* listGetElementAtIndex(List* list, unsigned int index);
 // Aufgabe 3
 boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
