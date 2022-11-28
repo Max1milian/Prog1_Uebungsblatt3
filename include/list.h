@@ -37,9 +37,7 @@ void listPrint(const List* list){
 		printf("-->");
 		e = (Element*)e->pSuccessor;
 	}
-	if (list == NULL) {
-		printf("liste leer!\n");
-	}
+	printf("liste leer!\n");
 
 }
 
@@ -49,7 +47,18 @@ Element* listFindElement(List* list, unsigned int value){
 	//listenkopf übergeben
 	//mit while drüberitterieren
 	//danach das element übergeben
+	Element* e = (Element*) calloc(2,sizeof(Element));
+	e = list->head;
+	while (e != NULL) {
+		if (e->value == value) {
+			return e;
+			break;
+		}
+		e = (Element*) e->pSuccessor;
+
+	}
 	return NULL;
+	free(e);
 }
 int listGetIndexOfElement(List* list, unsigned int value){
 	//element erstellen
@@ -58,7 +67,13 @@ int listGetIndexOfElement(List* list, unsigned int value){
 	//danach die Stelle übergeben
 
 }
-Element* listGetElementAtIndex(List* list, unsigned int index);
+
+Element* listGetElementAtIndex(List* list, unsigned int index){
+	Element* e = (Element*) calloc(2, sizeof(Element));
+	e = &(list->head[index]);
+	return e;	
+	free(e);
+}
 // Aufgabe 3
 boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
 boolean listDeleteElement(List* list, unsigned int value);
