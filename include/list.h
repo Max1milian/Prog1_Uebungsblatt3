@@ -13,7 +13,7 @@ struct List {
 typedef struct List List;
 // Aufgabe 1
 List* listCreate(){
-	List* L = (struct List*) calloc(20, sizeof(struct List));
+	List* L = (struct List*) malloc(sizeof(struct List));
 	L->head = NULL;
 	return L;
 }
@@ -21,13 +21,14 @@ List* listCreate(){
 void listPush(List* list, unsigned int value){
 	Element *e = (struct Element*) malloc(sizeof(struct Element));
 	e->value = value;
-	list->head->pSuccessor = e;
+	e->pSuccessor = list->head;
+	list->head = e;
 }
 
 Element* listPop(List* list){
-	Element* e;
-	list->head = (Element*)e->pSuccessor;
-	return list->head;
+	Element* e = list->head;
+	list->head = (Element*) list->head->pSuccessor;
+	return e;
 }
 
 void listPrint(const List* list){
@@ -47,35 +48,79 @@ Element* listFindElement(List* list, unsigned int value){
 	//listenkopf übergeben
 	//mit while drüberitterieren
 	//danach das element übergeben
-	Element* e = (Element*) calloc(2,sizeof(Element));
+	Element *e = (Element*) malloc(sizeof(Element));
 	e = list->head;
 	while (e != NULL) {
 		if (e->value == value) {
 			return e;
 			break;
 		}
-		e = (Element*) e->pSuccessor;
-
+		e = (Element*)e->pSuccessor;
 	}
 	return NULL;
-	free(e);
 }
 int listGetIndexOfElement(List* list, unsigned int value){
 	//element erstellen
 	//listenkopf übergeben
 	//mit while drüberitterieren
 	//danach die Stelle übergeben
-
+	Element* e = list->head;
+	int index = 0;
+	while (e != NULL)
+	{
+		if (e->value == value)
+		{
+			return index;
+			break;
+		}
+		index++;
+	}
+	return FALSE; //xoxoxoxoxoxoxoxo
 }
 
 Element* listGetElementAtIndex(List* list, unsigned int index){
-	Element* e = (Element*) calloc(2, sizeof(Element));
-	e = &(list->head[index]);
-	return e;	
-	free(e);
+	Element* e = list->head;
+	boolean found = TRUE;
+
+	for (unsigned int i = 0; i < index; i++) {
+		if (e == NULL)
+		{
+			found = FALSE;
+			break;
+		}
+		e = (Element*)e->pSuccessor;
+	}
+
+	if (found)
+	{
+		return e;
+	}
+	
+	
 }
 // Aufgabe 3
-boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
-boolean listDeleteElement(List* list, unsigned int value);
+//boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
+// nope
+
+boolean listDeleteElement(List* list, unsigned int value){
+	Element* spElement = listFindElement(list, value);
+	Element* preElement = NULL;
+	int index = 0;
+	if (spElement == NULL)
+	{
+		return FALSE;
+	}
+	index = listGetIndexOfElement(list, value);
+
+	if (index == 0 || spElement->pSuccessor == NULL)
+	{
+		list->head = (Element*) spElement->pSuccessor;
+		free(spElement);
+		return TRUE;
+	}
+		
+		preElement = (Element*) spElement->pSuccessor;
+		free(spElement);
+}
 
 #endif

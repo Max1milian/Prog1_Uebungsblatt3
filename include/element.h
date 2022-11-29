@@ -9,11 +9,10 @@ struct Element {
 typedef struct Element Element;
 
 Element* elementCreate(){
-	Element* e = (struct Element*) calloc(2, sizeof(struct Element));
+	Element* e = (struct Element*) malloc(sizeof(struct Element));
 	e->value = 0;
 	e->pSuccessor = NULL;
 	return e;
-	free(e);
 }
 
 #endif
