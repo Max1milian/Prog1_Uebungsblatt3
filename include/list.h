@@ -53,7 +53,6 @@ Element* listFindElement(List* list, unsigned int value){
 	while (e != NULL) {
 		if (e->value == value) {
 			return e;
-			break;
 		}
 		e = (Element*)e->pSuccessor;
 	}
@@ -71,7 +70,6 @@ int listGetIndexOfElement(List* list, unsigned int value){
 		if (e->value == value)
 		{
 			return index;
-			break;
 		}
 		index++;
 	}
