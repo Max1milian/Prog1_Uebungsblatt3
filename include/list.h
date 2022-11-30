@@ -27,7 +27,7 @@ void listPush(List* list, unsigned int value){
 
 Element* listPop(List* list){
 	Element* e = list->head;
-	list->head = (Element*) list->head->pSuccessor;
+	list->head = (Element*)list->head->pSuccessor;
 	return e;
 }
 
@@ -48,7 +48,7 @@ Element* listFindElement(List* list, unsigned int value){
 	//listenkopf übergeben
 	//mit while drüberitterieren
 	//danach das element übergeben
-	Element *e = (Element*) malloc(sizeof(Element));
+	Element* e = elementCreate();
 	e = list->head;
 	while (e != NULL) {
 		if (e->value == value) {
@@ -96,6 +96,7 @@ Element* listGetElementAtIndex(List* list, unsigned int index){
 		return e;
 	}
 	
+	return NULL;
 	
 }
 // Aufgabe 3
@@ -119,8 +120,7 @@ boolean listDeleteElement(List* list, unsigned int value){
 		return TRUE;
 	}
 		
-		preElement = (Element*) spElement->pSuccessor;
-		free(spElement);
+		return FALSE;
 }
 
 #endif
