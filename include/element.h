@@ -9,6 +9,7 @@ struct Element {
 typedef struct Element Element;
 
 Element* elementCreate(){
+	//Element auf dem Heap erstellen
 	Element* e = (struct Element*) malloc(sizeof(struct Element));
 	e->value = 0;
 	e->pSuccessor = NULL;

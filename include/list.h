@@ -2,9 +2,9 @@
 #define LIST_H
 
 #include "element.h"
-#include "myboolean.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 struct List {
     struct Element* head; // Zeiger auf Kopf der jeweiligen Liste
@@ -21,13 +21,13 @@ List* listCreate(){
 void listPush(List* list, unsigned int value){
 	Element *e = (struct Element*) malloc(sizeof(struct Element));
 	e->value = value;
-	e->pSuccessor = list->head;
-	list->head = e;
+	e->pSuccessor = list->head; //kopf der übergebenenen List
+	list->head = e; //Element wird neuer Kopf
 }
 
 Element* listPop(List* list){
 	Element* e = list->head;
-	list->head = (Element*)list->head->pSuccessor;
+	list->head = (Element*)list->head->pSuccessor; //casting als pointer weil void*
 	return e;
 }
 
@@ -73,17 +73,17 @@ int listGetIndexOfElement(List* list, unsigned int value){
 		}
 		index++;
 	}
-	return FALSE; //xoxoxoxoxoxoxoxo
+	return false; //xoxoxoxoxoxoxoxo
 }
 
 Element* listGetElementAtIndex(List* list, unsigned int index){
 	Element* e = list->head;
-	boolean found = TRUE;
+	bool found = true;
 
 	for (unsigned int i = 0; i < index; i++) {
 		if (e == NULL)
 		{
-			found = FALSE;
+			found = false;
 			break;
 		}
 		e = (Element*)e->pSuccessor;
@@ -98,16 +98,16 @@ Element* listGetElementAtIndex(List* list, unsigned int index){
 	
 }
 // Aufgabe 3
-//boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
+//bool listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex);
 // nope
 
-boolean listDeleteElement(List* list, unsigned int value){
+bool listDeleteElement(List* list, unsigned int value){
 	Element* spElement = listFindElement(list, value);
 	Element* preElement = NULL;
 	int index = 0;
 	if (spElement == NULL)
 	{
-		return FALSE;
+		return false;
 	}
 	index = listGetIndexOfElement(list, value);
 
@@ -115,10 +115,9 @@ boolean listDeleteElement(List* list, unsigned int value){
 	{
 		list->head = (Element*) spElement->pSuccessor;
 		free(spElement);
-		return TRUE;
+		return true;
 	}
 		
-		return FALSE;
+		return false;
 }
-
 #endif
