@@ -103,21 +103,24 @@ Element* listGetElementAtIndex(List* list, unsigned int index){
 
 bool listDeleteElement(List* list, unsigned int value){
 	Element* spElement = listFindElement(list, value);
-	Element* preElement = NULL;
-	int index = 0;
 	if (spElement == NULL)
 	{
 		return false;
 	}
-	index = listGetIndexOfElement(list, value);
 
-	if (index == 0 || spElement->pSuccessor == NULL)
-	{
-		list->head = (Element*) spElement->pSuccessor;
-		free(spElement);
-		return true;
+	Element* preElement = NULL;
+	
+	int index = listGetIndexOfElement(list, value);
+
+	if(index == 0){
+		preElement = spElement->pSuccessor;
+		list->head = preElement;
 	}
-		
+	else{
+		preElement = listGetElementAtIndex(list, index-1);
+		preElement->pSuccessor= spElement->pSuccessor;
+	}
+		free(spElement);
 		return false;
 }
 #endif

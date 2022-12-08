@@ -163,7 +163,7 @@ void testListGetElementAtIndex(void)
 	}
 
 	element = listGetElementAtIndex(list, 15);
-	printf("Index: %x \n", element);
+	//printf("Index: %i \n", element);
 
 	if (element == NULL)
 	{
